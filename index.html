@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 Traffic Monitor</title>
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</head>
+<body>
+  <h2>Status Lampu Lalu Lintas</h2>
+  <pre id="output">Menunggu data...</pre>
+
+  <script>
+    const client = mqtt.connect('wss://broker.hivemq.com:8884/mqtt');
+
+    client.on('connect', () => {
+      console.log("Terhubung ke MQTT!");
+      client.subscribe('esp32/traffic/status');
+    });
+
+    client.on('message', (topic, message) => {
+      const data = JSON.parse(message.toString());
+      document.getElementById('output').innerText =
+        `Lampu: ${data.lampu}
+Sisa Detik: ${data.sisa_detik}
+Jarak: ${data.jarak_cm} cm
+Deteksi: ${data.deteksi}`;
+    });
+  </script>
+</body>
+</html>

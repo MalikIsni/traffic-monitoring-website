@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Pengontrolan Lampu Lalu Lintas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <button class="theme-toggle" id="theme-toggle">
+    <i class="fas fa-moon"></i>
+  </button>
+  
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-traffic-light"></i> Sistem Pengontrolan Lampu Lalu Lintas</h1>
+      <p>Penyesuaian otomatis durasi lampu berdasarkan kepadatan kendaraan</p>
+    </header>
+    
+    <div class="dashboard">
+      <div class="card traffic-status">
+        <h2>Status Saat Ini</h2>
+        <div class="traffic-light">
+          <div class="light red" id="light-red"></div>
+          <div class="light yellow" id="light-yellow"></div>
+          <div class="light green" id="light-green"></div>
+        </div>
+        <div class="status-details">
+          <p><strong>Status:</strong> <span id="status-lampu">-</span></p>
+          <p><strong>Sisa Waktu:</strong> <span id="status-waktu">-</span> detik</p>
+          <p><strong>Kepadatan:</strong> <span id="status-kepadatan">-</span></p>
+          <p><strong>Jarak Kendaraan:</strong> <span id="status-jarak">-</span> cm</p>
+        </div>
+      </div>
+      
+      <div class="card density-chart">
+        <h2>Grafik Kepadatan (24 Jam Terakhir)</h2>
+        <canvas id="densityChart"></canvas>
+      </div>
+    </div>
+    
+    <div class="dashboard">
+      <div class="card statistics">
+        <h2>Statistik Lalu Lintas</h2>
+        <div class="stats-container" id="stats-container">
+          <div class="stat-item">
+            <h3>Sangat Padat</h3>
+            <p class="stat-value" id="stat-sangat-padat">0</p>
+          </div>
+          <div class="stat-item">
+            <h3>Padat</h3>
+            <p class="stat-value" id="stat-padat">0</p>
+          </div>
+          <div class="stat-item">
+            <h3>Normal</h3>
+            <p class="stat-value" id="stat-normal">0</p>
+          </div>
+          <div class="stat-item">
+            <h3>Sepi</h3>
+            <p class="stat-value" id="stat-sepi">0</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card history-data">
+        <h2>Riwayat Data Terakhir</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Waktu</th>
+                <th>Status Lampu</th>
+                <th>Kepadatan</th>
+                <th>Jarak (cm)</th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body">
+              <!-- Data will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card manual-control">
+        <h2>Kontrol Manual</h2>
+        <div class="control-buttons">
+          <button id="extend-green" class="control-btn success">Perpanjang Hijau</button>
+          <button id="force-red" class="control-btn danger">Paksa Merah</button>
+          <button id="force-green" class="control-btn success">Paksa Hijau</button>
+          <button id="auto-mode" class="control-btn primary">Mode Otomatis</button>
+        </div>
+        <div class="duration-control">
+          <label for="duration">Durasi (detik):</label>
+          <input type="number" id="duration" min="5" max="60" value="10">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <p>&copy; 2023 Sistem Pengontrolan Lampu Lalu Lintas | Dibuat oleh ..</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
